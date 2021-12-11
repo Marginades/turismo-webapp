@@ -36,20 +36,20 @@
 </div>
 
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="preferencia" id="preferencia"checked required value= "${tmp_user.preferencia}">
+  <input class="form-check-input" type="radio" name="preferencia" id="preferencia"checked required value= "Aventura">
   <label for ="preferencia" class="form-check-label">
     Aventura
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="preferencia" id="preferencia" required value= "${tmp_user.preferencia}">
+  <input class="form-check-input" type="radio" name="preferencia" id="preferencia" required value= "Degustacion">
   <label for="preferencia" class="form-check-label">
     Degustacion
   </label>
 </div>
 
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="preferencia" id="preferencia" required value= "${tmp_user.preferencia}">
+  <input class="form-check-input" type="radio" name="preferencia" id="preferencia" required value= "Paisajismo">
   <label for= "preferencia" class="form-check-label">
     Paisajismo
   </label>

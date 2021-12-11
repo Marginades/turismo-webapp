@@ -6,23 +6,23 @@ public interface Comprable {
 	
 	public String getNombre();
 	
-	public int getCosto();
+	public Integer getCosto();
 
-	public double getDuracion();
+	public Double getDuracion();
 
 	public String getTipo();
 	
-	public int getEntradasVendidas();
+	public Integer getEntradasVendidas();
 	
-	public boolean esComprablePor(Usuario user);
+	public Boolean esComprablePor(Usuario user);
 	
-	public boolean esOContiene(Comprable c);
+	public Boolean esOContiene(Comprable c);
 	
-	public boolean hayCupo();
+	public Boolean hayCupo();
 
 	public void comprarLugar() throws Exception;
 
-	public boolean esPromocion();
+	public Boolean esPromocion();
 	
 	public String toString();
 

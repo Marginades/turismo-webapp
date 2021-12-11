@@ -38,7 +38,8 @@ public abstract class Promocion implements Comprable {
 			}
 		return atracciones;
 	}
-		
+	
+	
 	
 	public Integer calculadorDeCostoTotal(List<Comprable> atraccionesDeLaPromo) {
 			int costoTotal = 0;
@@ -48,9 +49,13 @@ public abstract class Promocion implements Comprable {
 		}
 		return costoTotal;
 		}
+	
+	public String getAtraccionesPlanas() {
+		return this.atracciones_promo;
+	}
 		
-
-
+	
+	
 	
 	public int getId() {
 		return this.id_promo;
@@ -82,6 +87,9 @@ public abstract class Promocion implements Comprable {
 		return this.descripcion;
 	}
 	
+	public Double getDescuento() {
+		return null;
+	}
 	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
@@ -91,20 +99,16 @@ public abstract class Promocion implements Comprable {
 		return this.tipo_atracciones;
 	}
 	
+	public Boolean getActive() {
+		return this.active;
+	}
 	
 	public void setTipo_atracciones(String tipo_atracciones) {
 		this.tipo_atracciones = tipo_atracciones;
 	}
 	
-	public int getCosto() {
-		int contador = 0;
-		for (Comprable atraccion : this.atracciones) {
-			contador += atraccion.getCosto();
-		}
-		return contador;
-	}
 
-	public double getDuracion() {
+	public Double getDuracion() {
 		double duracion = 0;
 		for (Comprable a : this.atracciones) {
 			duracion += a.getDuracion();
@@ -123,7 +127,7 @@ public abstract class Promocion implements Comprable {
 		return tipo_atracciones;
 	}
 
-	public boolean hayCupo() {
+	public Boolean hayCupo() {
 		for (Comprable a : this.atracciones) {
 			if (!a.hayCupo()) {
 				return false;
@@ -132,7 +136,7 @@ public abstract class Promocion implements Comprable {
 		return true;
 	}
 
-	public int getEntradasVendidas() {
+	public Integer getEntradasVendidas() {
 		int entradas = 0;
 		for (Comprable atraccion : this.atracciones) {
 			entradas += atraccion.getEntradasVendidas();
@@ -146,11 +150,11 @@ public abstract class Promocion implements Comprable {
 		}
 	}
 
-	public boolean esPromocion() {
+	public Boolean esPromocion() {
 		return true;
 	}
 
-	public boolean esOContiene(Comprable atraccion) {
+	public Boolean esOContiene(Comprable atraccion) {
 		for (Comprable a : this.atracciones) {
 			if (atraccion.equals(a)) {
 				return true;

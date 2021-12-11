@@ -44,14 +44,14 @@ public class Atraccion implements Comprable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getCosto() {
+	public Integer getCosto() {
 		return this.costo;
 	}
 	
 	public void setCosto(Integer costo) {
 		this.costo = costo;
 	}
-	public double getDuracion() {
+	public Double getDuracion() {
 		return this.duracion;
 	}
 	
@@ -75,7 +75,7 @@ public class Atraccion implements Comprable {
 		this.cupoMaximo = cupo;
 	}
 
-	public int getEntradasVendidas() {
+	public Integer getEntradasVendidas() {
 		return this.entradasVendidas;
 	}
 
@@ -125,7 +125,7 @@ public class Atraccion implements Comprable {
 
 	
 	
-	public boolean hayCupo() {
+	public Boolean hayCupo() {
 		return this.entradasVendidas < this.cupoMaximo;
 	}
 	
@@ -139,16 +139,16 @@ public class Atraccion implements Comprable {
 		this.entradasVendidas += 1;
 	}
 
-	public boolean esOContiene(Comprable c) {
+	public Boolean esOContiene(Comprable c) {
 		return this.equals(c);
 	}
 
-	public boolean esComprablePor(Usuario user) {
+	public Boolean esComprablePor(Usuario user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean esPromocion() {
+	public Boolean esPromocion() {
 		return false;
 	}
 	

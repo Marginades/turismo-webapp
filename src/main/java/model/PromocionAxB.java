@@ -13,7 +13,7 @@ public class PromocionAxB extends Promocion {
 		super.atracciones = super.generadorDeAtracciones();
 		
 		this.atraccionGratis = atracciones.get(atracciones.size());
-		this.costoConDescuento = super.costoSinDescuento - atraccionGratis.getCosto();
+		this.costoConDescuento = (int) (super.costoSinDescuento.doubleValue() - atraccionGratis.getCosto().doubleValue()) ;
 		
 	}
 
@@ -37,22 +37,21 @@ public class PromocionAxB extends Promocion {
 	}
 
 	@Override
-	public boolean hayCupo() {
+	public Boolean hayCupo() {
 		return super.hayCupo() && atraccionGratis.hayCupo();
 	}
-
-	@Override
-	public int getCosto() {
-		return super.getCosto();
+	
+	public Integer getCostoConDescuento() {
+		return (Integer) this.costoConDescuento;
 	}
 
 	@Override
-	public double getDuracion() {
+	public Double getDuracion() {
 		return super.getDuracion() + atraccionGratis.getDuracion();
 	}
 
 	@Override
-	public boolean esOContiene(Comprable atraccion) {
+	public Boolean esOContiene(Comprable atraccion) {
 		if (!atraccion.equals(this.atraccionGratis)) {
 
 			for (Comprable a : this.atracciones) {
@@ -67,7 +66,7 @@ public class PromocionAxB extends Promocion {
 		}
 	}
 
-	public boolean esComprablePor(Usuario user) {
+	public Boolean esComprablePor(Usuario user) {
 		return false;
 	}
 
@@ -80,7 +79,7 @@ public class PromocionAxB extends Promocion {
 	}
 
 	@Override
-	public int getEntradasVendidas() {
+	public Integer getEntradasVendidas() {
 		int entradas = 0;
 		for (Comprable atraccion : this.atracciones) {
 			entradas += atraccion.getEntradasVendidas();
@@ -93,5 +92,13 @@ public class PromocionAxB extends Promocion {
 	public String getTipo() {
 		return super.getTipo_atracciones();
 	}
+
+	@Override
+	public Integer getCosto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 
 }

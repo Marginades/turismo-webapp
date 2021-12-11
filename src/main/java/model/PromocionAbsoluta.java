@@ -2,15 +2,15 @@ package model;
 
 public class PromocionAbsoluta extends Promocion {
 
-	protected Integer descuento;
+	protected Double descuento;
 	private Integer costoConDescuento;
 	
 
 	public PromocionAbsoluta(int id, String nombre, String descripcion, String tipo_promocion, String tipo_atracciones,
-			Integer descuento, String atracciones_promo, Boolean active) {
+			Double descuento, String atracciones_promo, Boolean active) {
 		super(id, nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
 		this.descuento = descuento;
-		this.costoConDescuento = super.costoSinDescuento - descuento;
+		this.costoConDescuento =  (int) (super.costoSinDescuento -  descuento);
 		super.atracciones = super.generadorDeAtracciones();
 	}
 
@@ -24,13 +24,12 @@ public class PromocionAbsoluta extends Promocion {
 		return impresion;
 	}
 
-	@Override
-	public int getCosto() {
-		int precio = super.getCosto();
-		return precio - descuento;
+	
+	public Integer getCostoConDescuento() {
+		return costoConDescuento;
 	}
 
-	public boolean esComprablePor(Usuario user) {
+	public Boolean esComprablePor(Usuario user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -40,8 +39,16 @@ public class PromocionAbsoluta extends Promocion {
 		return super.getTipo_atracciones();
 	}
 	
-	public Integer getCostoConDescuento() {
-		return costoConDescuento;
+	public Double getDescuento( ) {
+		return this.descuento;
 	}
+
+	@Override
+	public Integer getCosto() {
+		return this.costoConDescuento;
+	}
+	
+
+
 
 }
