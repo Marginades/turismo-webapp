@@ -5,13 +5,14 @@ public class PromocionAbsoluta extends Promocion {
 	protected Double descuento;
 	private Integer costoConDescuento;
 	
-
-	public PromocionAbsoluta(int id, String nombre, String descripcion, String tipo_promocion, String tipo_atracciones,
+	
+	public PromocionAbsoluta(int id, String nombre, String descripcion, String tipo_promociones, String tipo_atracciones,
 			Double descuento, String atracciones_promo, Boolean active) {
-		super(id, nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
+		super(id, nombre, descripcion, tipo_promociones, tipo_atracciones, atracciones_promo, active);
 		this.descuento = descuento;
 		this.costoConDescuento =  (int) (super.costoSinDescuento -  descuento);
-		super.atracciones = super.generadorDeAtracciones();
+
+		this.atracciones = super.atracciones;
 	}
 
 	@Override
@@ -46,6 +47,17 @@ public class PromocionAbsoluta extends Promocion {
 	@Override
 	public Integer getCosto() {
 		return this.costoConDescuento;
+	}
+
+	@Override
+	public Double getDuracion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
+		
 	}
 	
 

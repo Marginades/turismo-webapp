@@ -1,13 +1,15 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import persistence.commons.DAOFactory;
 
 public abstract class Promocion implements Comprable {
 	protected int id_promo;
 	protected String nombre;
-	protected String tipo_promocion;
+	protected String tipo_promociones;
 	protected String descripcion;
 	protected String tipo_atracciones;
 	protected Integer costoSinDescuento;
@@ -16,36 +18,27 @@ public abstract class Promocion implements Comprable {
 	protected Boolean active;
 	protected List<Comprable> atracciones;
 
+	private Map<String, String> errors;
 	
-	public Promocion(int id_promo, String nombre, String tipo_promocion, String descripcion, String tipo_atracciones, 
+	public Promocion(int id_promo, String nombre, String tipo_promociones, String descripcion, String tipo_atracciones, 
 			String atracciones_promo, Boolean active) {
 		this.id_promo = id_promo;
 		this.nombre = nombre;
-		this.tipo_promocion = tipo_promocion;
+		this.tipo_promociones = tipo_promociones;
 		this.descripcion = descripcion;
 		this.tipo_atracciones = tipo_atracciones;
 		this.active = active;
 		this.atracciones_promo = atracciones_promo;
-		this.costoSinDescuento = calculadorDeCostoTotal(generadorDeAtracciones());
-		
+		this.atracciones = DAOFactory.getPromocionDAO().generadorDeAtracciones(atracciones_promo);
+		this.costoSinDescuento = calculadorDeCostoTotal(this.atracciones);
+
 	}
-	
-	public List<Comprable> generadorDeAtracciones() {
-		String listaTemporal[] = this.atracciones_promo.split("-");
-		
-		for (int i = 1; i <= listaTemporal.length; i++) {
-			atracciones.add(DAOFactory.getAtraccionDAO().find(Integer.parseInt(listaTemporal[i])));
-			}
-		return atracciones;
-	}
-	
-	
 	
 	public Integer calculadorDeCostoTotal(List<Comprable> atraccionesDeLaPromo) {
 			int costoTotal = 0;
 		for (Comprable atraccion : atraccionesDeLaPromo) {
 			costoTotal += atraccion.getCosto();
-					
+				
 		}
 		return costoTotal;
 		}
@@ -74,15 +67,18 @@ public abstract class Promocion implements Comprable {
 	}
 	
 
-	public String getTipo_promocion() {
-		return this.tipo_promocion;
+	public String getTipo_promociones() {
+		return this.tipo_promociones;
 	}
 	
 	
-	public void setTipo_promocion(String tipo_promocion) {
-		this.tipo_promocion = tipo_promocion;
+	public void setTipo_promociones(String tipo_promociones) {
+		this.tipo_promociones = tipo_promociones;
 	}
 	
+	public void setAtracciones_promo(String atracciones_promo) {
+		this.atracciones_promo = atracciones_promo;
+	}
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -102,22 +98,43 @@ public abstract class Promocion implements Comprable {
 	public Boolean getActive() {
 		return this.active;
 	}
+	public void setActive(Boolean active) {
+		 this.active = active;
+	}
 	
 	public void setTipo_atracciones(String tipo_atracciones) {
 		this.tipo_atracciones = tipo_atracciones;
+	
 	}
 	
 
-	public Double getDuracion() {
-		double duracion = 0;
-		for (Comprable a : this.atracciones) {
-			duracion += a.getDuracion();
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (getCosto() <= 0) {
+			errors.put("cost", "Debe ser positivo");
 		}
-		return duracion;
+		if (duracion <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (atracciones_promo.isEmpty()) {
+			errors.put("capacity", "Debe tener atracciones");
+		}
+	}
+	
+	public Map<String, String> getErrors() {
+		return errors;
 	}
 
+	
 	public List<Comprable> getAtracciones() {
-		return this.generadorDeAtracciones();
+		return this.atracciones;
 	}
 
 

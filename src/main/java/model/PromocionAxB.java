@@ -10,10 +10,10 @@ public class PromocionAxB extends Promocion {
 	public PromocionAxB(int id, String nombre, String descripcion, String tipo_promocion, String tipo_atracciones,
 			 String atracciones_promo, Boolean active) {
 		super(id,nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
-		super.atracciones = super.generadorDeAtracciones();
-		
-		this.atraccionGratis = atracciones.get(atracciones.size());
-		this.costoConDescuento = (int) (super.costoSinDescuento.doubleValue() - atraccionGratis.getCosto().doubleValue()) ;
+		this.atracciones = super.atracciones;
+	
+		this.atraccionGratis = atracciones.remove(atracciones.size() -1);
+		this.costoConDescuento =  getCostoConDescuento();
 		
 	}
 
@@ -24,6 +24,11 @@ public class PromocionAxB extends Promocion {
 	@Override
 	public List<Comprable> getAtracciones() {
 		return super.getAtracciones();
+	}
+	
+	
+	public Integer getCostoConDescuento() {
+		return this.calculadorDeCostoTotal(this.atracciones);
 	}
 
 	@Override
@@ -41,13 +46,11 @@ public class PromocionAxB extends Promocion {
 		return super.hayCupo() && atraccionGratis.hayCupo();
 	}
 	
-	public Integer getCostoConDescuento() {
-		return (Integer) this.costoConDescuento;
-	}
+
 
 	@Override
 	public Double getDuracion() {
-		return super.getDuracion() + atraccionGratis.getDuracion();
+	return this.duracion;
 	}
 
 	@Override
@@ -95,9 +98,9 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public Integer getCosto() {
-		// TODO Auto-generated method stub
-		return null;
+	 return	this.costoConDescuento;
 	}
+	
 	
 
 

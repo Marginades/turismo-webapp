@@ -38,7 +38,9 @@
 				</a>
 			</div>
 		</c:if>
-		<table class="table table-stripped table-hover">
+		<div class = "container my-3">
+		<div class = "table-responsive">
+		<table class="datatable table table-stripped table-hover">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -78,7 +80,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
+</div>
+</div>
 	</main>
 
 </body>

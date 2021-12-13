@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.Comprable;
 import model.Promocion;
 import model.PromocionAbsoluta;
 import model.PromocionAxB;
 import model.PromocionPorcentual;
 import persistence.PromocionDAO;
 import persistence.commons.ConnectionProvider;
+import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
 
 public class PromocionDAOImpl implements PromocionDAO {
@@ -36,7 +38,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public Promocion find(Integer id) {
+	public Promocion find(int id) {
 		try {
 			String sql = "SELECT * FROM PROMOCIONES WHERE ID_PROMO = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -55,38 +57,53 @@ public class PromocionDAOImpl implements PromocionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	public List<Comprable> generadorDeAtracciones(String atracciones_promo) {
+		
+		try {
+		String listaTemporal[] = atracciones_promo.split("-");
+		List<Comprable> atracciones = new LinkedList<Comprable>();
+		
+		for (int i = 0; i < listaTemporal.length; i++) {
+			
+			atracciones.add(DAOFactory.getAtraccionDAO().find(Integer.valueOf(listaTemporal[i])));
+			
+		}
+		return atracciones;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
 	private Promocion toPromocion(ResultSet promocionRegister) throws SQLException {
 		Promocion promo = null;
-		if (promocionRegister.getString(3).equals("ABS")) {
-		
-				promo = new PromocionAbsoluta(promocionRegister.getInt(1), promocionRegister.getString(2), 
-						promocionRegister.getString(3), promocionRegister.getString(4), 
-						promocionRegister.getString(5), promocionRegister.getDouble(6),
-						promocionRegister.getString(7), promocionRegister.getInt(8) == 1);
+		if (promocionRegister.getString("tipo_promociones").equals("ABS")) {
+
+			promo = new PromocionAbsoluta(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
+					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
+					promocionRegister.getString("tipo_atracciones"), promocionRegister.getDouble("descuento"),
+					promocionRegister.getString("atracciones_promo"), promocionRegister.getInt("active") == 1);
 		}
-		
-		if (promocionRegister.getString(3).equals("POR")) {
-		
-			promo = new PromocionPorcentual(promocionRegister.getInt(1), promocionRegister.getString(2), 
-					promocionRegister.getString(3), promocionRegister.getString(4), 
-					promocionRegister.getString(5), promocionRegister.getDouble(6),
-					promocionRegister.getString(7), promocionRegister.getInt(8) == 1);
-	}
-		
-		if (promocionRegister.getString(3).equals("AXB")) {
-			
-			promo = new PromocionAxB(promocionRegister.getInt(1), promocionRegister.getString(2), 
-					promocionRegister.getString(3), promocionRegister.getString(4), 
-					promocionRegister.getString(5),
-					promocionRegister.getString(7), promocionRegister.getInt(8) == 1);
-	}
-		
-		
+
+		if (promocionRegister.getString("tipo_promociones").equals("POR")) {
+
+			promo = new PromocionPorcentual(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
+					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
+					promocionRegister.getString("tipo_atracciones"), promocionRegister.getDouble("descuento"),
+					promocionRegister.getString("atracciones_promo"), promocionRegister.getInt("active") == 1);
+		}
+
+		if (promocionRegister.getString("tipo_promociones").equals("AXB")) {
+
+			promo = new PromocionAxB(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
+					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
+					promocionRegister.getString("tipo_atracciones"), promocionRegister.getString("atracciones_promo"),
+					promocionRegister.getInt("active") == 1);
+		}
+
 		return promo;
 	}
-	
-				
+
 	@Override
 	public int insert(Promocion promocion) {
 		try {
@@ -96,11 +113,11 @@ public class PromocionDAOImpl implements PromocionDAO {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			int i = 1;
 			statement.setString(i++, promocion.getNombre());
-			statement.setString(i++, promocion.getTipo_promocion());
+			statement.setString(i++, promocion.getTipo_promociones());
 			statement.setString(i++, promocion.getDescripcion());
 			statement.setString(i++, promocion.getTipo());
 
-			if ((promocion.getTipo_promocion()).equals("ABS") || (promocion.getTipo_promocion().equals("POR"))) {
+			if ((promocion.getTipo_promociones()).equals("ABS") || (promocion.getTipo_promociones().equals("POR"))) {
 				statement.setDouble(i++, promocion.getDescuento());
 			}
 
@@ -118,23 +135,25 @@ public class PromocionDAOImpl implements PromocionDAO {
 	public int update(Promocion promocion) {
 		try {
 			String sql = "UPDATE PROMOCIONES SET NOMBRE = ?, TIPO_PROMOCIONES = ?, DESCRIPCION = ?, TIPO_ATRACCIONES = ?, DESCUENTO = ?, COSTO = ?, "
-							+ "ATRACCIONES_PROMO = ?, ACTIVE = ? WHERE ID_ATRACCION = ?";
+					+ "ATRACCIONES_PROMO = ?, ACTIVE = ? WHERE ID_ATRACCION = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			int i = 1;
 			statement.setString(i++, promocion.getNombre());
-			statement.setString(i++, promocion.getTipo_promocion());
+			statement.setString(i++, promocion.getTipo_promociones());
 			statement.setString(i++, promocion.getDescripcion());
 			statement.setString(i++, promocion.getTipo_atraccion());
 			statement.setDouble(i++, promocion.getDescuento());
 			statement.setDouble(i++, promocion.getCosto());
 			statement.setString(i++, promocion.getAtraccionesPlanas());
-			
-			if (promocion.getActive() == true) 		{statement.setString(i++, "1");}
-			else 									{statement.setString(i++, "0");}
-	
-			
+
+			if (promocion.getActive() == true) {
+				statement.setString(i++, "1");
+			} else {
+				statement.setString(i++, "0");
+			}
+
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -174,5 +193,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+
 	}
+
 }

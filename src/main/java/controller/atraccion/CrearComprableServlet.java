@@ -10,17 +10,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
 import services.AtraccionService;
+import services.PromocionService;
 
 @WebServlet("/atraccion/create.do")
 public class CrearComprableServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 3455721046062278592L;
+
 	private AtraccionService atraccionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.atraccionService = new AtraccionService();
+	
 	}
 
 	@Override

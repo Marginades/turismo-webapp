@@ -50,6 +50,25 @@
 				</tr>
 			</thead>
 			<tbody>
+			
+			<c:forEach items="${promociones}" var="promocion">
+					<tr>
+						<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
+							<p><c:out value="${promocion.descripcion}"></c:out></p></td>
+						<td><c:out value="${promocion.costo}"></c:out></td>
+
+						<td><c:out value="${promocion.tipo}"></c:out></td>
+						
+						<td><c:if test="${user.admin}">
+								<a href="/turismo-webapp/atraccion/edit.do?id=${promocion.id}"
+									class="btn btn-light rounded-0" role="button"><i
+									class="bi bi-pencil-fill"></i></a>
+								<a href="/turismo-webapp/atraccion/delete.do?id=${promocion.id}"
+									class="btn btn-danger rounded" role="button"><i
+									class="bi bi-x-circle-fill"></i></a>
+							</c:if></td>
+									</tr>
+				</c:forEach>
 				<c:forEach items="${atracciones}" var="atraccion">
 					<tr>
 						<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>

@@ -33,7 +33,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public Atraccion find(Integer id) {
+	public Atraccion find(int id) {
 		try {
 			String sql = "SELECT * FROM ATRACCIONES WHERE ID_ATRACCION = ?";
 			Connection conn = ConnectionProvider.getConnection();

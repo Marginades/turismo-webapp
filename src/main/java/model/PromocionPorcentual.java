@@ -1,5 +1,7 @@
 package model;
 
+import persistence.commons.DAOFactory;
+
 public class PromocionPorcentual extends Promocion {
 
 	private Double descuento;
@@ -9,8 +11,9 @@ public class PromocionPorcentual extends Promocion {
 			Double descuento, String atracciones_promo, Boolean active) {
 		
 		super(id, nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
-		super.atracciones = super.generadorDeAtracciones();
-		this.costoConDescuento = (int) (Math.round(this.costoSinDescuento * descuento));
+		this.atracciones = DAOFactory.getPromocionDAO(). generadorDeAtracciones(atracciones_promo);
+		this.costoSinDescuento = super.costoSinDescuento;
+		this.costoConDescuento = (int) (this.costoSinDescuento - (Math.round(this.costoSinDescuento * descuento)));
 
 	}
 
@@ -50,6 +53,18 @@ public class PromocionPorcentual extends Promocion {
 
 	public String getTipo_promo () {
 		return "POR";
+	}
+
+
+	@Override
+	public Double getDuracion() {
+		return this.duracion;
+	}
+
+
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
+		
 	}
 	
 }
