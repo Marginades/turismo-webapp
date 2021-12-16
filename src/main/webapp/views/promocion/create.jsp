@@ -14,10 +14,12 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	
-	   function generadorDeString(atracciones_promo) {
-      	   stringDeAtracciones = atracciones_promo[0];
-         for (let i = 1 ;i < atracciones_promo.length; i++){
-      	  stringDeAtracciones += "-" + atracciones_promo[i] 
+	const atraccionesPromoInput = document.querySelector('#atracciones_promo')
+	
+	   function generadorDeString(Array) {
+      	   stringDeAtracciones = Array[0];
+         for (let i = 1 ;i < Array.length; i++){
+      	  stringDeAtracciones += "-" + Array[i] 
       }
    	  return stringDeAtracciones;
    }
@@ -32,23 +34,21 @@ $(document).ready(function () {
 	});
 	
  
-    	$('#atracciones_checkbox').click(function() {
+    	$('#cargarAtracciones').click(function() {
     		   var atracciones_promo = [];
     		   var stringDeAtracciones = "";
     		   
-    	         
-      
                 
-      		   
-               $.each($("input:checkbox[name='atracciones_promo']:checked"), function () {
+      		  
+               $.each($("input:checkbox[name='atracciones_checkbox']:checked"), function () {
                   atracciones_promo.push($(this).val());
                       
     		});
-               console.log($(stringDeAtracciones));
-               generadorDeString(atracciones_promo);
-               $('#atracciones_promo').value = stringDeAtracciones;
-          
-              
+               
+               console.log(generadorDeString(atracciones_promo));
+          		atraccionesPromoInput.setAttribute('value', generadorDeString(atracciones_promo)
+          );
+             
     		/*  
     		$("#submitPromocion").click(function () {
                    

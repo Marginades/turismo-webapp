@@ -53,7 +53,7 @@ public class CrearPromocionServlet extends HttpServlet {
 		String tipo_promociones = req.getParameter("tipo_promociones");
 		Double descuento = Double.valueOf(req.getParameter("descuentoInput"));
 		String tipo_atracciones = tipo_Atraccion;
-		String atracciones_promo = promocionService.procesadorDeArrays(req.getParameterValues("atracciones_promo[]"));
+		String atracciones_promo = req.getParameter("atracciones_promo");
 		Boolean active = true;
 		Promocion promocion = promocionService.create(nombre, tipo_promociones ,descripcion, tipo_atracciones,atracciones_promo, descuento, active);
 		if (promocion.isValid()) {

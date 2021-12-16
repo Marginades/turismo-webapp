@@ -101,13 +101,13 @@ public class Atraccion implements Comprable {
 		errors = new HashMap<String, String>();
 
 		if (costo <= 0) {
-			errors.put("cost", "Debe ser positivo");
+			errors.put("costo", "Debe ser positivo");
 		}
 		if (duracion <= 0) {
-			errors.put("duration", "Debe ser positivo");
+			errors.put("duracion", "Debe ser positivo");
 		}
 		if (cupoMaximo <= 0) {
-			errors.put("capacity", "Debe ser positivo");
+			errors.put("cupoMaximo", "Debe ser positivo");
 		}
 	}
 	

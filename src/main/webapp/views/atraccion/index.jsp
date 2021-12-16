@@ -82,11 +82,11 @@
 							</c:choose> 
 										
 										<c:if test="${user.admin}">
-										<a href="/turismo-webapp/atraccion/edit.do?id=${promocion.id}"
+										<a href="/turismo-webapp/atraccion/edit.do?id=${comprable.id}"
 											class="btn btn-light rounded-0" role="button"><i
 											class="bi bi-pencil-fill"></i></a>
 										<a
-											href="/turismo-webapp/atraccion/delete.do?id=${promocion.id}"
+											href="/turismo-webapp/atraccion/delete.do?id=${comprable.id}"
 											class="btn btn-danger rounded" role="button"><i
 											class="bi bi-x-circle-fill"></i></a>
 									</c:if>
@@ -124,11 +124,11 @@
 							</c:choose> 
 										
 										<c:if test="${user.admin}">
-										<a href="/turismo-webapp/atraccion/edit.do?id=${atraccion.id}"
+										<a href="/turismo-webapp/atraccion/edit.do?id=${comprable.id}"
 											class="btn btn-light rounded-0" role="button"><i
 											class="bi bi-pencil-fill"></i></a>
 										<a
-											href="/turismo-webapp/atraccion/delete.do?id=${atraccion.id}"
+											href="/turismo-webapp/atraccion/delete.do?id=${comprable.id}"
 											class="btn btn-danger rounded" role="button"><i
 											class="bi bi-x-circle-fill"></i></a>
 									</c:if>

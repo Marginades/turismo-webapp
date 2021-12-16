@@ -14,24 +14,24 @@ public class PromocionTest2 {
 	PromocionAbsoluta paisaje;
 	PromocionService promocionService;
 
+		
 	@Before
 	public void setUp() throws Exception {
 
 		aventura = new PromocionAxB(1, "Aventura en las montañas", "LALALALA", "AXB", "Aventura", "21-22-20", true);
-		degustacion = new PromocionPorcentual(1, "Paladares elficos", "LALALALA", "POR", "Degustacion", 0.1, "28-26",
-				true);
+		degustacion = new PromocionPorcentual(1, "Paladares elficos", "LALALALA", "POR", "Degustacion", 0.1, "28-26", true);
 		paisaje = new PromocionAbsoluta(1, "Tarde Diferente", "LALALA", "ABS", "Paisajismo", 60.0, "30-32", true);
 		promocionService = new PromocionService();
 
 	}
-
+;
 	@Test
 	public void PromocionAbsolutaTest() {
 
 		assertEquals(40, paisaje.getCostoConDescuento(), 0.1);
 		assertEquals(7, paisaje.getDuracion(), 1);
 
-	}
+
 
 	@Test
 	public void PromocionAxBTest() {

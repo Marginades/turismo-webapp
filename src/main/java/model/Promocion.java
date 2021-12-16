@@ -31,6 +31,7 @@ public abstract class Promocion implements Comprable {
 		this.active = active;
 		this.atracciones = DAOFactory.getPromocionDAO().generadorDeAtracciones(atracciones_promo);
 		this.costoSinDescuento = calculadorDeCostoTotal(this.atracciones);
+		
 	}
 	
 	public Integer calculadorDeCostoTotal(List<Comprable> atraccionesDeLaPromo) {

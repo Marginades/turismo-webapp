@@ -78,9 +78,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 	private Promocion toPromocion(ResultSet promocionRegister) throws SQLException {
 		Promocion promo = null;
 		if (promocionRegister.getString(3).equals("ABS")) {
-
+		
 			promo = new PromocionAbsoluta(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(4), promocionRegister.getString(3),
 					promocionRegister.getString(5), promocionRegister.getDouble(6),
 					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
@@ -88,7 +88,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		if (promocionRegister.getString(3).equals("POR")) {
 
 			promo = new PromocionPorcentual(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(4), promocionRegister.getString(3),
 					promocionRegister.getString(5), promocionRegister.getDouble(6),
 					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
@@ -96,7 +96,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		if (promocionRegister.getString(3).equals("AXB")) {
 
 			promo = new PromocionAxB(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(4), promocionRegister.getString(3),
 					promocionRegister.getString(5), promocionRegister.getString(8),
 					promocionRegister.getBoolean(9));
 		}

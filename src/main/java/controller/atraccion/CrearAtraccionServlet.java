@@ -42,10 +42,9 @@ public class CrearAtraccionServlet extends HttpServlet {
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
 		Double duracion = Double.parseDouble(req.getParameter("duracion"));
 		Integer cupoMaximo = Integer.parseInt(req.getParameter("cupoMaximo"));
-		String tipo = req.getParameter("tipo");
-	
-		Boolean active = Integer.parseInt(req.getParameter("active")) == 1;
-		Atraccion atraccion = atraccionService.create(nombre, descripcion, costo, duracion, cupoMaximo, tipo, active);
+		String tipo_atraccion = req.getParameter("tipo_atracciones");
+		Boolean active = true;
+		Atraccion atraccion = atraccionService.create(nombre, descripcion, costo, duracion, cupoMaximo, tipo_atraccion, active);
 		if (atraccion.isValid()) {
 			resp.sendRedirect("/turismo-webapp/atraccion/index.do");
 		} else {

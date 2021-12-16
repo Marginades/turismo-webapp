@@ -11,7 +11,7 @@ public class PromocionPorcentual extends Promocion {
 			Double descuento, String atracciones_promo, Boolean active) {
 		
 		super(id, nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
-		this.atracciones = DAOFactory.getPromocionDAO(). generadorDeAtracciones(atracciones_promo);
+		this.atracciones = DAOFactory.getPromocionDAO().generadorDeAtracciones(atracciones_promo);
 		this.costoSinDescuento = super.costoSinDescuento;
 		this.costoConDescuento = (int) (this.costoSinDescuento - (Math.round(this.costoSinDescuento * descuento)));
 

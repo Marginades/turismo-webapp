@@ -28,7 +28,7 @@ public class BorrarAtraccionServlet extends HttpServlet {
 
 		atraccionService.delete(id);
 
-		resp.sendRedirect("/turismo/atraccion/index.do");
+		resp.sendRedirect("/turismo-webapp/atraccion/index.do");
 	}
 
 

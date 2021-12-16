@@ -60,11 +60,11 @@
 </div>
 
 </div></c:forEach>
-<div class ="mb-3">
-<input class="form-control invisible" type="text" id="atracciones_promo" ></input>
-</div>
+
+		<input class="form-control invisible" type="text" name="atracciones_promo" id="atracciones_promo"></input>
+			
 <div>
-	<button type="button" id="cargarAtracciones" class="btn btn-primary">Guardar</button>
+	<button type="button" id="cargarAtracciones" class="btn btn-primary">Confirmar Atracciones</button>
 	<button type="submit" class="btn btn-primary">Guardar</button>
 	<a onclick="window.history.back();" class="btn btn-secondary"
 		role="button">Cancelar</a>
