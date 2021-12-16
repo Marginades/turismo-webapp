@@ -67,7 +67,7 @@ public class Atraccion implements Comprable {
 		this.tipo = tipo.toLowerCase();
 	}
 
-	public int getCupo() {
+	public Integer getCupo() {
 		return this.cupoMaximo;
 	}
 	

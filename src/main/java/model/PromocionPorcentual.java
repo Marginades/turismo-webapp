@@ -56,11 +56,6 @@ public class PromocionPorcentual extends Promocion {
 	}
 
 
-	@Override
-	public Double getDuracion() {
-		return this.duracion;
-	}
-
 
 	public void setDescuento(Double descuento) {
 		this.descuento = descuento;

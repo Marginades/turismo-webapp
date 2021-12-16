@@ -52,18 +52,18 @@ public class Usuario {
 		return this.presupuesto >= producto.getCosto() && this.disponibilidad >= producto.getDuracion()
 				&& !this.yaCompro(producto);
 	}
-	public void addToItinerary(Atraccion attraction) {
-		this.presupuesto -= attraction.getCosto();
-		this.disponibilidad -= attraction.getDuracion();
+	public void addToItinerary(Comprable comprable) {
+		this.presupuesto -= comprable.getCosto();
+		this.disponibilidad -= comprable.getDuracion();
 		// TODO agregar a su lista
 	}
 
-	public boolean canAfford(Atraccion attraction) {
-		return attraction.getCosto() <= this.presupuesto;
+	public boolean canAfford(Comprable compra) {
+		return compra.getCosto() <= this.presupuesto;
 	}
 
-	public boolean canAttend(Atraccion attraction) {
-		return attraction.getDuracion() <= this.disponibilidad;
+	public boolean canAttend(Comprable compra) {
+		return compra.getDuracion() <= this.disponibilidad;
 	}
 
 

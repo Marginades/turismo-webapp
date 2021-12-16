@@ -6,6 +6,8 @@ public interface Comprable {
 	
 	public String getNombre();
 	
+	public String getDescripcion();
+	
 	public Integer getCosto();
 
 	public Double getDuracion();
@@ -26,7 +28,9 @@ public interface Comprable {
 	
 	public String toString();
 
+	public Integer getCupo();
 	
+
 
 
 

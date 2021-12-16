@@ -24,6 +24,16 @@ public class PromocionService {
 			return this.constructorPromociones(nombre, tipo_promociones, descripcion, tipo_atracciones, atracciones_promo, descuento, active);
 			
 			}
+	
+	public String procesadorDeArrays(String[] ArrayDeAtracciones) {
+		String atracciones_promo = ArrayDeAtracciones[0];
+		
+		for (int i = 1; i < ArrayDeAtracciones.length; i++) {
+			atracciones_promo += "-"+ArrayDeAtracciones[i];
+		}
+		return atracciones_promo;
+		
+	}
 
 	public Promocion update(Integer id, String nombre, String tipo_promociones, String descripcion, String tipo_atracciones, String atracciones_promo, Double descuento, Boolean active) {
 		

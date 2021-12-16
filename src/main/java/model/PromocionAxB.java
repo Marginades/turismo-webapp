@@ -11,10 +11,9 @@ public class PromocionAxB extends Promocion {
 			 String atracciones_promo, Boolean active) {
 		super(id,nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
 		this.atracciones = super.atracciones;
-	
 		this.atraccionGratis = atracciones.remove(atracciones.size() -1);
-		this.costoConDescuento =  getCostoConDescuento();
-		
+
+	
 	}
 
 	public Comprable getAtraccionGratis() {
@@ -23,7 +22,15 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public List<Comprable> getAtracciones() {
-		return super.getAtracciones();
+		atracciones = super.getAtracciones();
+		atracciones.add(atraccionGratis);
+		return atracciones;
+		
+	}
+	
+	@Override
+	public Double getDuracion() {
+		return super.getDuracion() + atraccionGratis.getDuracion();
 	}
 	
 	
@@ -46,12 +53,6 @@ public class PromocionAxB extends Promocion {
 		return super.hayCupo() && atraccionGratis.hayCupo();
 	}
 	
-
-
-	@Override
-	public Double getDuracion() {
-	return this.duracion;
-	}
 
 	@Override
 	public Boolean esOContiene(Comprable atraccion) {
@@ -98,9 +99,17 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public Integer getCosto() {
-	 return	this.costoConDescuento;
+	 return	this.getCostoConDescuento();
 	}
+
+	public Integer getCupo() {
+		
+	Integer sumaDeCupos = super.getCupo() + atraccionGratis.getCupo(); 
+
+	return sumaDeCupos;
 	
+			
+	}
 	
 
 

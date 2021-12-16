@@ -77,28 +77,28 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private Promocion toPromocion(ResultSet promocionRegister) throws SQLException {
 		Promocion promo = null;
-		if (promocionRegister.getString("tipo_promociones").equals("ABS")) {
+		if (promocionRegister.getString(3).equals("ABS")) {
 
-			promo = new PromocionAbsoluta(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
-					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
-					promocionRegister.getString("tipo_atracciones"), promocionRegister.getDouble("descuento"),
-					promocionRegister.getString("atracciones_promo"), promocionRegister.getInt("active") == 1);
+			promo = new PromocionAbsoluta(promocionRegister.getInt(1), promocionRegister.getString(2),
+					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(5), promocionRegister.getDouble(6),
+					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
 
-		if (promocionRegister.getString("tipo_promociones").equals("POR")) {
+		if (promocionRegister.getString(3).equals("POR")) {
 
-			promo = new PromocionPorcentual(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
-					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
-					promocionRegister.getString("tipo_atracciones"), promocionRegister.getDouble("descuento"),
-					promocionRegister.getString("atracciones_promo"), promocionRegister.getInt("active") == 1);
+			promo = new PromocionPorcentual(promocionRegister.getInt(1), promocionRegister.getString(2),
+					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(5), promocionRegister.getDouble(6),
+					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
 
-		if (promocionRegister.getString("tipo_promociones").equals("AXB")) {
+		if (promocionRegister.getString(3).equals("AXB")) {
 
-			promo = new PromocionAxB(promocionRegister.getInt("id_promo"), promocionRegister.getString("nombre"),
-					promocionRegister.getString("tipo_promociones"), promocionRegister.getString("descripcion"),
-					promocionRegister.getString("tipo_atracciones"), promocionRegister.getString("atracciones_promo"),
-					promocionRegister.getInt("active") == 1);
+			promo = new PromocionAxB(promocionRegister.getInt(1), promocionRegister.getString(2),
+					promocionRegister.getString(3), promocionRegister.getString(4),
+					promocionRegister.getString(5), promocionRegister.getString(8),
+					promocionRegister.getBoolean(9));
 		}
 
 		return promo;
@@ -116,13 +116,15 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setString(i++, promocion.getTipo_promociones());
 			statement.setString(i++, promocion.getDescripcion());
 			statement.setString(i++, promocion.getTipo());
-
 			if ((promocion.getTipo_promociones()).equals("ABS") || (promocion.getTipo_promociones().equals("POR"))) {
 				statement.setDouble(i++, promocion.getDescuento());
 			}
-
+			else { i++; };
 			statement.setString(i++, promocion.getAtraccionesPlanas());
-			statement.setString(i++, "1");
+			statement.setInt(i++, 1);
+			
+
+
 			int rows = statement.executeUpdate();
 
 			return rows;

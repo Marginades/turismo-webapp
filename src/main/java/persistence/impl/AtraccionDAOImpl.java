@@ -31,6 +31,28 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	public List<Atraccion> buscarPorTipo(String tipo) {
+		try {
+			String sql = "SELECT * FROM ATRACCIONES WHERE TIPO = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, tipo);
+
+			ResultSet resultados = statement.executeQuery();
+
+			List<Atraccion> atracciones = new LinkedList<Atraccion>();
+			
+			while (resultados.next()) {
+				atracciones.add(toAttraction(resultados));
+			}
+
+			return atracciones;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	
+	}
 
 	@Override
 	public Atraccion find(int id) {
@@ -136,5 +158,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+
+
 
 }

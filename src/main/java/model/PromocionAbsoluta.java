@@ -11,8 +11,8 @@ public class PromocionAbsoluta extends Promocion {
 		super(id, nombre, descripcion, tipo_promociones, tipo_atracciones, atracciones_promo, active);
 		this.descuento = descuento;
 		this.costoConDescuento =  (int) (super.costoSinDescuento -  descuento);
-
 		this.atracciones = super.atracciones;
+	
 	}
 
 	@Override
@@ -49,11 +49,6 @@ public class PromocionAbsoluta extends Promocion {
 		return this.costoConDescuento;
 	}
 
-	@Override
-	public Double getDuracion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void setDescuento(Double descuento) {
 		this.descuento = descuento;

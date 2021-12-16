@@ -14,24 +14,23 @@ public abstract class Promocion implements Comprable {
 	protected String tipo_atracciones;
 	protected Integer costoSinDescuento;
 	protected Double duracion;
+	protected List<Integer> cupoPromocion;
 	protected String atracciones_promo;
 	protected Boolean active;
 	protected List<Comprable> atracciones;
 
 	private Map<String, String> errors;
 	
-	public Promocion(int id_promo, String nombre, String tipo_promociones, String descripcion, String tipo_atracciones, 
+	public Promocion(int id_promo, String nombre, String descripcion, String tipo_promociones, String tipo_atracciones, 
 			String atracciones_promo, Boolean active) {
 		this.id_promo = id_promo;
 		this.nombre = nombre;
+		this.tipo_atracciones = tipo_atracciones;
 		this.tipo_promociones = tipo_promociones;
 		this.descripcion = descripcion;
-		this.tipo_atracciones = tipo_atracciones;
 		this.active = active;
-		this.atracciones_promo = atracciones_promo;
 		this.atracciones = DAOFactory.getPromocionDAO().generadorDeAtracciones(atracciones_promo);
 		this.costoSinDescuento = calculadorDeCostoTotal(this.atracciones);
-
 	}
 	
 	public Integer calculadorDeCostoTotal(List<Comprable> atraccionesDeLaPromo) {
@@ -48,7 +47,13 @@ public abstract class Promocion implements Comprable {
 	}
 		
 	
-	
+	public Double getDuracion() {
+		Double duracionTotal =  0.0;
+		for (Comprable atraccion : this.atracciones) {
+			duracionTotal += atraccion.getDuracion();
+		}
+		return duracionTotal;
+	}
 	
 	public int getId() {
 		return this.id_promo;
@@ -120,10 +125,10 @@ public abstract class Promocion implements Comprable {
 		if (getCosto() <= 0) {
 			errors.put("cost", "Debe ser positivo");
 		}
-		if (duracion <= 0) {
+		if (getDuracion() <= 0) {
 			errors.put("duration", "Debe ser positivo");
 		}
-		if (atracciones_promo.isEmpty()) {
+		if (this.atracciones.isEmpty()) {
 			errors.put("capacity", "Debe tener atracciones");
 		}
 	}
@@ -152,6 +157,26 @@ public abstract class Promocion implements Comprable {
 		}
 		return true;
 	}
+	
+
+	public Integer getCupo() {
+		Integer sumaDeCupos = 0;
+		for (Comprable a : this.atracciones) {
+			sumaDeCupos += a.getCupo();
+			}
+		
+	
+		return sumaDeCupos;
+			
+	}
+
+	public Integer getCosto() {
+		return costoSinDescuento;
+	}
+
+	public void setCosto(Integer costoSinDescuento) {
+		this.costoSinDescuento = costoSinDescuento;
+	}
 
 	public Integer getEntradasVendidas() {
 		int entradas = 0;
@@ -161,7 +186,7 @@ public abstract class Promocion implements Comprable {
 		return entradas;
 	}
 
-	public void comprarLugar() throws Exception {
+	public void comprarLugar() throws Exception  {
 		for (Comprable a : this.atracciones) {
 			a.comprarLugar(); // este metodo ya captura la excepcion en la clase atraccion
 		}

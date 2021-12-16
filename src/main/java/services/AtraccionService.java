@@ -11,6 +11,11 @@ public class AtraccionService {
 	public List<Atraccion> list() {
 		return DAOFactory.getAtraccionDAO().findAll();
 	}
+	
+	public List<Atraccion>listarPorTipo(String tipo){
+		return DAOFactory.getAtraccionDAO().buscarPorTipo(tipo);
+	}
+	
 	public Atraccion create(String name, String descripcion, Integer costo, Double duracion, Integer cupoMaximo, String tipo, Boolean active) {
 
 		Atraccion attraction = new Atraccion(-1, name, descripcion, costo, duracion, cupoMaximo, tipo, active);

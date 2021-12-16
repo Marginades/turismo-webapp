@@ -10,7 +10,7 @@
 
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 
-	<main class="container">
+	<main class="container" >
 
 		<c:if test="${flash != null}">
 			<div class="alert alert-danger">
@@ -32,63 +32,88 @@
 		</div>
 
 		<c:if test="${user.isAdmin()}">
+			<div><
 			<div class="mb-3">
-				<a href="/turismo-webapp/atraccion/create.do" class="btn btn-primary"
-					role="button"> <i class="bi bi-plus-lg"></i> Nueva Atracción
+				<a href="/turismo-webapp/atraccion/create.do"
+					class="btn btn-primary" role="button"> <i class="bi bi-plus-lg"></i>
+					Nueva Atracción
 				</a>
-			</div>
+				  
+    </div>
+    	<div class="mb-3">
+				<a href="/turismo-webapp/promocion/create.do"
+					class="btn btn-primary" role="button"> <i class="bi bi-plus-lg"></i>
+					Nueva Promocion
+				</a>
+				  
+    </div>
+</div>
+		
 		</c:if>
-		<table class="table table-stripped table-hover">
-			<thead>
-				<tr>
-					<th>Atraccion</th>
-					<th>Costo</th>
-					<th>Duracion</th>
-					<th>Cupo</th>
-					<th>Tipo</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
+		
+		
+		<div class="card-group" id ="grupoPromociones">
+			<c:forEach items="${comprables}" var="comprable">
 			
-			<c:forEach items="${promociones}" var="promocion">
-					<tr>
-						<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
-							<p><c:out value="${promocion.descripcion}"></c:out></p></td>
-						<td><c:out value="${promocion.costo}"></c:out></td>
-
-						<td><c:out value="${promocion.tipo}"></c:out></td>
-						
-						<td><c:if test="${user.admin}">
-								<a href="/turismo-webapp/atraccion/edit.do?id=${promocion.id}"
-									class="btn btn-light rounded-0" role="button"><i
-									class="bi bi-pencil-fill"></i></a>
-								<a href="/turismo-webapp/atraccion/delete.do?id=${promocion.id}"
-									class="btn btn-danger rounded" role="button"><i
-									class="bi bi-x-circle-fill"></i></a>
-							</c:if></td>
-									</tr>
-				</c:forEach>
-				<c:forEach items="${atracciones}" var="atraccion">
-					<tr>
-						<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
-							<p><c:out value="${atraccion.descripcion}"></c:out></p></td>
-						<td><c:out value="${atraccion.costo}"></c:out></td>
-						<td><c:out value="${atraccion.duracion}"></c:out></td>
-						<td><c:out value="${atraccion.cupo}"></c:out></td>
-						<td><c:out value="${atraccion.tipo}"></c:out></td>
-						
-						<td><c:if test="${user.admin}">
-								<a href="/turismo-webapp/atraccion/edit.do?id=${atraccion.id}"
-									class="btn btn-light rounded-0" role="button"><i
-									class="bi bi-pencil-fill"></i></a>
-								<a href="/turismo-webapp/atraccion/delete.do?id=${atraccion.id}"
-									class="btn btn-danger rounded" role="button"><i
-									class="bi bi-x-circle-fill"></i></a>
-							</c:if> <c:choose>
-
+							<c:if test="${comprable.esPromocion()}">
+							<div class="col">
+								<div class="card" style="width: 18rem;">
+									<img src="..." class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${comprable.nombre}</h5>
+										<p class="card-text">${comprable.descripcion }</p>
+									</div>
+									<ul class="list-group list-group-flush">
+									<c:forEach items="${promocion.getAtracciones}" var="atraccion">
+										<li class="list-group-item"> ${atraccion.getNombre}"</li>
+										</c:forEach>
+									</ul>
+									<div class="card-body">
+														<c:choose>
 								<c:when
-									test="${user.canAfford(atraccion) && user.canAttend(atraccion) && atraccion.canHost(1)}">
+									test="${user.canAfford(comprable) && user.canAttend(comprable) && comprable.hayCupo()}">
+									<a href="/turismo-webapp/atraccion/buy.do?id=${promocion.id}"
+										class="btn btn-success rounded" role="button">Comprar</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" class="btn btn-secondary rounded disabled"
+										role="button">No se puede comprar</a>
+								</c:otherwise>
+							</c:choose> 
+										
+										<c:if test="${user.admin}">
+										<a href="/turismo-webapp/atraccion/edit.do?id=${promocion.id}"
+											class="btn btn-light rounded-0" role="button"><i
+											class="bi bi-pencil-fill"></i></a>
+										<a
+											href="/turismo-webapp/atraccion/delete.do?id=${promocion.id}"
+											class="btn btn-danger rounded" role="button"><i
+											class="bi bi-x-circle-fill"></i></a>
+									</c:if>
+						
+								</div>								
+</div>
+</div>
+</c:if>
+					
+</c:forEach>
+							</div>
+<div class="card-group">
+			<c:forEach items="${comprables}" var="comprable">
+			
+							<c:if test="${!comprable.esPromocion()}">
+							<div class="col">
+								<div class="card" style="width: 18rem;">
+									<img src="..." class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${comprable.nombre}</h5>
+										<p class="card-text">${comprable.descripcion }</p>
+									</div>
+						
+									<div class="card-body">
+														<c:choose>
+								<c:when
+									test="${user.canAfford(comprable) && user.canAttend(comprable) && comprable.hayCupo()}">
 									<a href="/turismo-webapp/atraccion/buy.do?id=${atraccion.id}"
 										class="btn btn-success rounded" role="button">Comprar</a>
 								</c:when>
@@ -96,12 +121,25 @@
 									<a href="#" class="btn btn-secondary rounded disabled"
 										role="button">No se puede comprar</a>
 								</c:otherwise>
-							</c:choose></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-
+							</c:choose> 
+										
+										<c:if test="${user.admin}">
+										<a href="/turismo-webapp/atraccion/edit.do?id=${atraccion.id}"
+											class="btn btn-light rounded-0" role="button"><i
+											class="bi bi-pencil-fill"></i></a>
+										<a
+											href="/turismo-webapp/atraccion/delete.do?id=${atraccion.id}"
+											class="btn btn-danger rounded" role="button"><i
+											class="bi bi-x-circle-fill"></i></a>
+									</c:if>
+						
+								</div>								
+</div>
+</div>
+</c:if>
+						
+									</c:forEach>
+							</div>
 	</main>
 
 </body>

@@ -5,6 +5,11 @@
 			type="text" class="form-control" id="nombre" name="nombre"
 			required value="${atraccion.nombre}">
 	</div>
+		<div class="mb-3">
+	<label for="descripcion" class="col-form-label">Descripcion:</label> <input
+			type="text" class="form-control" id="descripcion" name="descripcion"
+			required value="${atraccion.nombre}">
+	</div>
 	<div class="mb-3">
 		<label for="cost"
 			class='col-form-label ${atraccion.errors.get("costo") != null ? "is-invalid" : "" }'>Costo:</label>
