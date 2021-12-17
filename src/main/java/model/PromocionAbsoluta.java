@@ -6,9 +6,9 @@ public class PromocionAbsoluta extends Promocion {
 	private Integer costoConDescuento;
 	
 	
-	public PromocionAbsoluta(int id, String nombre, String descripcion, String tipo_promociones, String tipo_atracciones,
+	public PromocionAbsoluta(int id, String nombre, String tipo_promociones, String descripcion, String tipo_atracciones,
 			Double descuento, String atracciones_promo, Boolean active) {
-		super(id, nombre, descripcion, tipo_promociones, tipo_atracciones, atracciones_promo, active);
+		super(id, nombre, tipo_promociones, descripcion, tipo_atracciones, atracciones_promo, active);
 		this.descuento = descuento;
 		this.costoConDescuento =  (int) (super.costoSinDescuento -  descuento);
 		this.atracciones = super.atracciones;

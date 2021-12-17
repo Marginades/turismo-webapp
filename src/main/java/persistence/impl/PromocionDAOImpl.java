@@ -80,7 +80,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		if (promocionRegister.getString(3).equals("ABS")) {
 		
 			promo = new PromocionAbsoluta(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(4), promocionRegister.getString(3),
+					promocionRegister.getString(3), promocionRegister.getString(4),
 					promocionRegister.getString(5), promocionRegister.getDouble(6),
 					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
@@ -88,7 +88,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		if (promocionRegister.getString(3).equals("POR")) {
 
 			promo = new PromocionPorcentual(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(4), promocionRegister.getString(3),
+					promocionRegister.getString(3), promocionRegister.getString(4),
 					promocionRegister.getString(5), promocionRegister.getDouble(6),
 					promocionRegister.getString(8), promocionRegister.getBoolean(9));
 		}
@@ -96,7 +96,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		if (promocionRegister.getString(3).equals("AXB")) {
 
 			promo = new PromocionAxB(promocionRegister.getInt(1), promocionRegister.getString(2),
-					promocionRegister.getString(4), promocionRegister.getString(3),
+					promocionRegister.getString(3), promocionRegister.getString(4),
 					promocionRegister.getString(5), promocionRegister.getString(8),
 					promocionRegister.getBoolean(9));
 		}
@@ -115,7 +115,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setString(i++, promocion.getNombre());
 			statement.setString(i++, promocion.getTipo_promociones());
 			statement.setString(i++, promocion.getDescripcion());
-			statement.setString(i++, promocion.getTipo());
+			statement.setString(i++, promocion.getTipo_atracciones());
 			if ((promocion.getTipo_promociones()).equals("ABS") || (promocion.getTipo_promociones().equals("POR"))) {
 				statement.setDouble(i++, promocion.getDescuento());
 			}

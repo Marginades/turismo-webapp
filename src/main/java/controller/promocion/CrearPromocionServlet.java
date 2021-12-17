@@ -49,15 +49,15 @@ public class CrearPromocionServlet extends HttpServlet {
 	
 		
 		String nombre = req.getParameter("nombre");
-		String descripcion = req.getParameter("descripcion");
 		String tipo_promociones = req.getParameter("tipo_promociones");
+		String descripcion = req.getParameter("descripcion");
 		Double descuento = Double.valueOf(req.getParameter("descuentoInput"));
 		String tipo_atracciones = tipo_Atraccion;
 		String atracciones_promo = req.getParameter("atracciones_promo");
 		Boolean active = true;
-		Promocion promocion = promocionService.create(nombre, tipo_promociones ,descripcion, tipo_atracciones,atracciones_promo, descuento, active);
+		Promocion promocion = promocionService.create(nombre, tipo_promociones,descripcion, tipo_atracciones, atracciones_promo, descuento, active);
 		if (promocion.isValid()) {
-			resp.sendRedirect("/turismo-webapp/promocion/index.do");
+			resp.sendRedirect("/turismo-webapp/atraccion/index.do");
 		} else {
 			req.setAttribute("promocion", promocion);
 

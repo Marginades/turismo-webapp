@@ -21,14 +21,15 @@ public abstract class Promocion implements Comprable {
 
 	private Map<String, String> errors;
 	
-	public Promocion(int id_promo, String nombre, String descripcion, String tipo_promociones, String tipo_atracciones, 
+	public Promocion(int id_promo, String nombre, String tipo_promociones, String descripcion, String tipo_atracciones, 
 			String atracciones_promo, Boolean active) {
 		this.id_promo = id_promo;
 		this.nombre = nombre;
-		this.tipo_atracciones = tipo_atracciones;
 		this.tipo_promociones = tipo_promociones;
 		this.descripcion = descripcion;
+		this.tipo_atracciones = tipo_atracciones;
 		this.active = active;
+		this.atracciones_promo = atracciones_promo;
 		this.atracciones = DAOFactory.getPromocionDAO().generadorDeAtracciones(atracciones_promo);
 		this.costoSinDescuento = calculadorDeCostoTotal(this.atracciones);
 		

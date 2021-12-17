@@ -64,7 +64,7 @@ public class Atraccion implements Comprable {
 	}
 	
 	public void setTipo(String tipo) {
-		this.tipo = tipo.toLowerCase();
+		this.tipo = tipo;
 	}
 
 	public Integer getCupo() {

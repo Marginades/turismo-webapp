@@ -7,9 +7,9 @@ public class PromocionAxB extends Promocion {
 	protected Comprable atraccionGratis;
 	protected Integer costoConDescuento;
 	
-	public PromocionAxB(int id, String nombre, String descripcion, String tipo_promocion, String tipo_atracciones,
+	public PromocionAxB(int id, String nombre, String tipo_promocion,String descripcion, String tipo_atracciones,
 			 String atracciones_promo, Boolean active) {
-		super(id,nombre, descripcion, tipo_promocion, tipo_atracciones, atracciones_promo, active);
+		super(id,nombre, tipo_promocion, descripcion, tipo_atracciones, atracciones_promo, active);
 		this.atracciones = super.atracciones;
 		this.atraccionGratis = atracciones.remove(atracciones.size() -1);
 

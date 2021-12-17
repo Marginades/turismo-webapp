@@ -31,8 +31,8 @@ public class PromocionTest2 {
 		assertEquals(40, paisaje.getCostoConDescuento(), 0.1);
 		assertEquals(7, paisaje.getDuracion(), 1);
 
-
-
+	}
+	
 	@Test
 	public void PromocionAxBTest() {
 

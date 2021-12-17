@@ -61,7 +61,7 @@
 
 </div></c:forEach>
 
-		<input class="form-control invisible" type="text" name="atracciones_promo" id="atracciones_promo"></input>
+		<input class="form-control invisible" type="text" name="atracciones_promo" id="atracciones_promo" value = "${promocion.atracciones_promo}"></input>
 			
 <div>
 	<button type="button" id="cargarAtracciones" class="btn btn-primary">Confirmar Atracciones</button>
